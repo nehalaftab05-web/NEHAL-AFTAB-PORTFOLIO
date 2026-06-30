@@ -3,7 +3,8 @@
 
 A fully responsive, single-file personal portfolio website built with **vanilla HTML, CSS, and JavaScript**. This is the current, polished iteration of my portfolio — featuring a custom Blue-Black Ocean color system, animated dot-grid hero background, bento stat panel with a live terminal widget, and a fully showcased 13+ project catalog.
 
-**🔗 Live:** [nehalaftab05-web.github.io](https://nehalaftab05-web.github.io)
+**🔗 Live:** 
+https://nehalaftab05-web.github.io/NEHAL-AFTAB-PORTFOLIO/ 
 
 ---
 
