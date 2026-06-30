@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="description" content="Nehal Aftab — Frontend Developer, UI/UX Designer, AI Engineer & Software Developer. CS student at FAST-NUCES Faisalabad."/>
+<meta name="keywords" content="Nehal Aftab, Frontend Developer, UI/UX Designer, AI Engineer, FAST NUCES, portfolio"/>
+<meta property="og:title" content="Nehal Aftab — Developer & Designer"/>
+<meta property="og:description" content="Frontend Dev · UI/UX · AI Engineer · Software Developer · FAST-NUCES"/>
+<meta name="theme-color" content="#042B44"/>
+<title>Nehal Aftab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════════════════════════════
+   DESIGN TOKENS  — Blue-Black Ocean palette from your image
+   #042B44 · #096B90 · #A1CCDC · #08171E · #71B7D5
+═══════════════════════════════════════════════════════════ */
+:root{
+  /* core */
+  --ocean-deep:   #042B44;
+  --ocean-mid:    #096B90;
+  --ocean-sky:    #71B7D5;
+  --ocean-mist:   #A1CCDC;
+  --abyss:        #08171E;
+  --ink:          #060E14;
+
+  /* bg stack */
+  --bg:           #07121A;
+  --bg2:          #0A1D28;
+  --bg3:          #0D2535;
+  --bg4:          #0F2D40;
+
+  /* border */
+  --br:           rgba(9,107,144,.25);
+  --br2:          rgba(9,107,144,.12);
+  --br-hover:     rgba(113,183,213,.45);
+
+  /* text */
+  --txt:          #E8F4F8;
+  --txt2:         #8BABB8;
+  --txt3:         #4D6E7A;
+
+  /* accents */
+  --accent:       #71B7D5;
+  --accent2:      #096B90;
+  --accent-glow:  rgba(113,183,213,.15);
+  --green:        #3FB950;
+  --yellow:       #E3B341;
+  --purple:       #A78BFA;
+  --orange:       #F97316;
+
+  /* type */
+  --f-sans: 'Inter', system-ui, sans-serif;
+  --f-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* layout */
+  --nav-h:  62px;
+  --max-w:  1160px;
+  --ease:   cubic-bezier(.22,1,.36,1);
+  --ease2:  cubic-bezier(.4,0,.2,1);
+}
+
+/* ─── RESET ─────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--f-sans);
+  background:var(--bg);
+  color:var(--txt);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+img{display:block;max-width:100%}
+button{cursor:pointer;border:none;background:none;font:inherit}
+
+/* scrollbar */
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--ocean-mid);border-radius:3px}
+::selection{background:rgba(113,183,213,.2);color:var(--txt)}
+
+/* ─── LAYOUT ────────────────────────────────────── */
+.wrap{max-width:var(--max-w);margin:0 auto;padding:0 clamp(1rem,4vw,2.5rem)}
+section{padding:clamp(4.5rem,9vw,7rem) 0}
+.divider{height:1px;background:var(--br2)}
+
+/* ─── NAV ───────────────────────────────────────── */
+nav{
+  position:fixed;inset:0 0 auto;z-index:200;
+  height:var(--nav-h);
+  display:flex;align-items:center;
+  background:rgba(7,18,26,.88);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--br2);
+  transition:border-color .3s,box-shadow .3s;
+}
+nav.scrolled{
+  border-color:var(--br);
+  box-shadow:0 1px 40px rgba(4,43,68,.6);
+}
+.nav-inner{
+  display:flex;align-items:center;
+  justify-content:space-between;gap:1rem;
+}
+/* logo */
+.logo{
+  display:flex;align-items:center;gap:.6rem;
+  font-family:var(--f-mono);font-weight:600;font-size:.9rem;
+  color:var(--txt);letter-spacing:-.01em;
+}
+.logo-bracket{color:var(--accent);font-size:1.1rem}
+.logo-pulse{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--green);flex-shrink:0;
+  box-shadow:0 0 8px var(--green);
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.85)}}
+.logo-open{
+  font-family:var(--f-mono);font-size:.58rem;
+  padding:.15rem .45rem;border-radius:4px;
+  background:rgba(63,185,80,.1);
+  color:var(--green);
+  border:1px solid rgba(63,185,80,.25);
+  letter-spacing:.04em;
+}
+
+/* nav links */
+.nav-links{display:flex;align-items:center;gap:.15rem}
+.nav-links a{
+  font-size:.8rem;font-weight:500;color:var(--txt2);
+  padding:.42rem .8rem;border-radius:7px;
+  transition:color .15s,background .15s;
+  position:relative;
+}
+.nav-links a:hover{color:var(--accent);background:var(--accent-glow)}
+.nav-links a.active{color:var(--accent)}
+.nav-links a.active::after{
+  content:'';position:absolute;bottom:-1px;left:50%;
+  transform:translateX(-50%);
+  width:16px;height:2px;border-radius:2px;
+  background:var(--accent);
+}
+.nav-hire{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-size:.78rem;font-weight:600;
+  background:var(--ocean-mid);color:#fff;
+  padding:.42rem 1.1rem;border-radius:8px;
+  border:1px solid rgba(113,183,213,.2);
+  transition:background .18s,transform .18s,box-shadow .18s;
+  white-space:nowrap;
+}
+.nav-hire:hover{
+  background:var(--ocean-sky);color:var(--abyss);
+  transform:translateY(-1px);
+  box-shadow:0 8px 24px rgba(113,183,213,.2);
+}
+.nav-hire svg{width:13px;height:13px;fill:currentColor}
+
+/* burger */
+.burger{display:none;flex-direction:column;gap:4.5px;padding:5px;
+  border-radius:6px;transition:background .15s}
+.burger:hover{background:var(--accent-glow)}
+.burger span{display:block;width:21px;height:1.5px;
+  background:var(--txt2);border-radius:2px;transition:.25s var(--ease)}
+.burger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+
+/* mobile menu */
+.mobile-nav{
+  display:none;position:fixed;inset:0;top:var(--nav-h);z-index:190;
+  background:var(--bg2);
+  flex-direction:column;padding:1.5rem;gap:.5rem;
+}
+.mobile-nav.open{display:flex}
+.mobile-nav a{
+  display:flex;align-items:center;gap:.8rem;
+  padding:1rem 1.2rem;border-radius:10px;
+  font-weight:500;color:var(--txt2);
+  border:1px solid var(--br2);
+  transition:color .15s,border-color .15s,background .15s;
+}
+.mobile-nav a:hover{color:var(--accent);border-color:var(--br);background:var(--accent-glow)}
+.mobile-nav .mn{
+  font-family:var(--f-mono);font-size:.65rem;
+  color:var(--accent);min-width:1.4rem;
+}
+
+/* ─── HERO ──────────────────────────────────────── */
+.hero{
+  min-height:100svh;padding-top:var(--nav-h);
+  display:flex;flex-direction:column;justify-content:center;
+  padding-bottom:4rem;position:relative;overflow:hidden;
+}
+
+/* animated dot grid */
+.hero-grid{
+  position:absolute;inset:0;z-index:0;
+  background-image:
+    radial-gradient(circle,rgba(9,107,144,.35) 1px,transparent 1px);
+  background-size:36px 36px;
+  mask-image:radial-gradient(ellipse 75% 70% at 50% 40%,#000 20%,transparent 80%);
+  animation:gridDrift 20s ease-in-out infinite alternate;
+}
+@keyframes gridDrift{0%{background-position:0 0}100%{background-position:18px 18px}}
+
+/* glow orbs */
+.glow-orb{
+  position:absolute;border-radius:50%;
+  pointer-events:none;z-index:0;filter:blur(80px);
+  animation:orbFloat 8s ease-in-out infinite alternate;
+}
+.glow-orb.a{
+  width:400px;height:400px;
+  top:-10%;right:-5%;
+  background:radial-gradient(circle,rgba(9,107,144,.18) 0%,transparent 70%);
+}
+.glow-orb.b{
+  width:300px;height:300px;
+  bottom:10%;left:-8%;
+  background:radial-gradient(circle,rgba(4,43,68,.25) 0%,transparent 70%);
+  animation-delay:-4s;
+}
+@keyframes orbFloat{0%{transform:translateY(0) scale(1)}100%{transform:translateY(-20px) scale(1.05)}}
+
+.hero .wrap{position:relative;z-index:1}
+
+/* hero layout: left content + right bento panel */
+.hero-layout{
+  display:grid;
+  grid-template-columns:1fr 360px;
+  gap:3rem;align-items:center;
+}
+
+/* hero left */
+.hero-label{
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-family:var(--f-mono);font-size:.7rem;
+  color:var(--accent);letter-spacing:.06em;
+  margin-bottom:1.4rem;
+}
+.hero-label::before{
+  content:'';width:22px;height:1px;background:var(--accent);
+}
+
+.hero-name{
+  font-size:clamp(3rem,6.5vw,5.5rem);
+  font-weight:900;letter-spacing:-.05em;
+  line-height:.95;color:var(--txt);
+  margin-bottom:1rem;
+}
+.hero-name .hi{
+  display:block;font-size:clamp(1rem,2vw,1.4rem);
+  font-weight:400;letter-spacing:.02em;color:var(--txt3);
+  margin-bottom:.4rem;font-family:var(--f-mono);
+}
+.hero-name .nm{
+  background:linear-gradient(135deg,var(--txt) 0%,var(--ocean-sky) 60%,var(--ocean-mid) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+.hero-roles{
+  display:flex;flex-wrap:wrap;gap:.45rem;
+  margin-bottom:1.5rem;
+}
+.rtag{
+  font-family:var(--f-mono);font-size:.68rem;letter-spacing:.04em;
+  padding:.28rem .65rem;border-radius:100px;border:1px solid;
+  transition:transform .2s;
+}
+.rtag:hover{transform:translateY(-2px)}
+.rtag.b{color:var(--ocean-sky);border-color:rgba(113,183,213,.3);background:rgba(113,183,213,.06)}
+.rtag.g{color:var(--green);border-color:rgba(63,185,80,.3);background:rgba(63,185,80,.06)}
+.rtag.p{color:var(--purple);border-color:rgba(167,139,250,.3);background:rgba(167,139,250,.06)}
+.rtag.o{color:var(--orange);border-color:rgba(249,115,22,.3);background:rgba(249,115,22,.06)}
+.rtag.y{color:var(--yellow);border-color:rgba(227,179,65,.3);background:rgba(227,179,65,.06)}
+
+.hero-bio{
+  font-size:.98rem;line-height:1.8;color:var(--txt2);
+  max-width:48ch;margin-bottom:2rem;
+}
+.hero-bio strong{color:var(--txt);font-weight:500}
+
+.hero-btns{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center}
+.btn-p{
+  display:inline-flex;align-items:center;gap:.45rem;
+  background:var(--ocean-mid);color:#fff;
+  font-size:.85rem;font-weight:600;
+  padding:.65rem 1.4rem;border-radius:9px;
+  border:1px solid rgba(113,183,213,.2);
+  transition:all .18s var(--ease);
+}
+.btn-p:hover{
+  background:var(--ocean-sky);color:var(--abyss);
+  transform:translateY(-2px);
+  box-shadow:0 10px 30px rgba(113,183,213,.2);
+}
+.btn-o{
+  display:inline-flex;align-items:center;gap:.45rem;
+  background:transparent;color:var(--txt2);
+  font-size:.85rem;font-weight:500;
+  padding:.65rem 1.4rem;border-radius:9px;
+  border:1px solid var(--br);
+  transition:all .18s var(--ease);
+}
+.btn-o:hover{
+  color:var(--accent);border-color:var(--br-hover);
+  background:var(--accent-glow);transform:translateY(-2px);
+}
+.btn-p svg,.btn-o svg{width:14px;height:14px;fill:currentColor;flex-shrink:0}
+
+/* hero scroll hint */
+.scroll-hint{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.4rem;
+  font-family:var(--f-mono);font-size:.6rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--txt3);
+  animation:sFloat 2.8s ease-in-out infinite;
+}
+@keyframes sFloat{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(5px)}}
+.scroll-hint::after{
+  content:'';width:1px;height:36px;
+  background:linear-gradient(var(--ocean-mid),transparent);
+}
+
+/* ─── HERO BENTO PANEL (right) ──────────────────── */
+.hero-bento{
+  display:grid;grid-template-columns:1fr 1fr;
+  grid-template-rows:auto auto auto;
+  gap:.65rem;
+}
+.bento{
+  background:var(--bg2);border:1px solid var(--br2);
+  border-radius:14px;padding:1.1rem 1.1rem;
+  transition:border-color .25s,transform .25s var(--ease),
+             box-shadow .25s var(--ease);
+  position:relative;overflow:hidden;
+}
+.bento::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 80% 0%,rgba(9,107,144,.08) 0%,transparent 60%);
+  pointer-events:none;
+}
+.bento:hover{
+  border-color:var(--br-hover);transform:translateY(-3px);
+  box-shadow:0 12px 40px rgba(4,43,68,.5);
+}
+.bento.wide{grid-column:span 2}
+
+.bento-num{
+  font-family:var(--f-mono);font-size:2rem;font-weight:700;
+  color:var(--accent);line-height:1;
+  letter-spacing:-.04em;
+}
+.bento-num sup{font-size:1rem;color:var(--ocean-mid)}
+.bento-label{
+  font-family:var(--f-mono);font-size:.62rem;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--txt3);
+  margin-top:.2rem;
+}
+.bento-bar{
+  margin-top:.7rem;height:3px;border-radius:2px;
+  background:var(--br2);overflow:hidden;
+}
+.bento-bar-fill{
+  height:100%;border-radius:2px;
+  background:linear-gradient(90deg,var(--ocean-mid),var(--ocean-sky));
+  transform-origin:left;
+  animation:barFill 1.4s var(--ease) forwards;
+  transform:scaleX(0);
+}
+@keyframes barFill{to{transform:scaleX(1)}}
+
+/* mini terminal in bento */
+.bento-terminal{font-family:var(--f-mono);font-size:.72rem;line-height:1.8}
+.t-p{color:#3FB950}.t-path{color:var(--purple)}.t-c{color:var(--txt2)}
+.t-key{color:var(--ocean-sky)}.t-val{color:var(--yellow)}
+.t-cursor{
+  display:inline-block;width:7px;height:12px;
+  background:var(--accent);margin-left:1px;
+  animation:blink 1s step-end infinite;vertical-align:text-bottom;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* ─── SECTION LABELS ────────────────────────────── */
+.sec-label{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:var(--f-mono);font-size:.68rem;
+  color:var(--accent);letter-spacing:.08em;
+  margin-bottom:.6rem;
+}
+.sec-label::before{
+  content:'';width:18px;height:1px;background:var(--accent);
+}
+.sec-title{
+  font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:800;
+  letter-spacing:-.04em;color:var(--txt);line-height:1.1;
+}
+.sec-desc{
+  color:var(--txt2);font-size:.94rem;line-height:1.75;
+  max-width:54ch;margin-top:.7rem;
+}
+
+/* ─── ABOUT ─────────────────────────────────────── */
+.about-grid{
+  display:grid;grid-template-columns:1.15fr .85fr;
+  gap:3.5rem;align-items:start;
+}
+.about-prose p{
+  font-size:.95rem;line-height:1.82;color:var(--txt2);
+  margin-bottom:.9rem;
+}
+.about-prose p:last-child{margin:0}
+.about-prose strong{color:var(--txt);font-weight:500}
+.stack-grid{
+  display:flex;flex-wrap:wrap;gap:.45rem;
+  margin-top:1.4rem;
+}
+.chip{
+  font-family:var(--f-mono);font-size:.68rem;
+  padding:.28rem .65rem;border-radius:6px;
+  background:var(--bg3);border:1px solid var(--br2);
+  color:var(--txt2);letter-spacing:.02em;
+  transition:border-color .15s,color .15s;
+}
+.chip:hover{border-color:var(--br-hover);color:var(--accent)}
+
+/* about aside */
+.about-aside{display:flex;flex-direction:column;gap:.6rem}
+.info-row{
+  display:flex;align-items:flex-start;gap:.75rem;
+  padding:.85rem 1rem;
+  background:var(--bg2);border:1px solid var(--br2);
+  border-radius:10px;
+  transition:border-color .2s;
+}
+.info-row:hover{border-color:var(--br)}
+.info-emoji{font-size:.95rem;line-height:1;flex-shrink:0;margin-top:2px}
+.info-k{font-family:var(--f-mono);font-size:.6rem;letter-spacing:.07em;text-transform:uppercase;color:var(--txt3);margin-bottom:2px}
+.info-v{font-size:.85rem;font-weight:500;color:var(--txt);line-height:1.4}
+.info-v a{color:var(--accent);transition:opacity .15s}
+.info-v a:hover{opacity:.75}
+
+/* achievement badge */
+.badge-row{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.6rem}
+.badge{
+  display:inline-flex;align-items:center;gap:.35rem;
+  font-family:var(--f-mono);font-size:.62rem;letter-spacing:.04em;
+  padding:.3rem .7rem;border-radius:100px;
+  background:rgba(113,183,213,.08);
+  color:var(--accent);border:1px solid rgba(113,183,213,.2);
+}
+.badge .bd{width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
+
+/* ─── SKILLS ────────────────────────────────────── */
+.skills-section{background:var(--bg2)}
+.skills-layout{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--br2);
+  border:1px solid var(--br2);border-radius:14px;overflow:hidden;
+}
+@media(max-width:860px){.skills-layout{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.skills-layout{grid-template-columns:1fr}}
+.sk-block{
+  background:var(--bg2);padding:1.6rem 1.5rem;
+  transition:background .2s;
+}
+.sk-block:hover{background:var(--bg3)}
+.sk-head{display:flex;align-items:center;gap:.55rem;margin-bottom:1rem}
+.sk-ico{font-size:1.05rem}
+.sk-title{
+  font-size:.75rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.07em;color:var(--txt);
+}
+.sk-list{display:flex;flex-direction:column;gap:.38rem}
+.sk-item{
+  display:flex;align-items:center;gap:.55rem;
+  font-size:.83rem;color:var(--txt2);
+}
+.sk-item::before{
+  content:'';width:4px;height:4px;border-radius:50%;
+  background:var(--accent);flex-shrink:0;opacity:.7;
+}
+
+/* ─── PROJECTS ──────────────────────────────────── */
+.proj-topbar{
+  display:flex;align-items:flex-end;
+  justify-content:space-between;gap:1rem;
+  margin-bottom:2.5rem;flex-wrap:wrap;
+}
+.proj-count-box{
+  text-align:right;
+  font-family:var(--f-mono);font-size:.68rem;color:var(--txt3);
+}
+.proj-count-box strong{
+  display:block;font-family:var(--f-sans);
+  font-size:2.2rem;font-weight:900;
+  color:var(--accent);line-height:1;letter-spacing:-.04em;
+}
+
+.proj-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(330px,1fr));
+  gap:1rem;
+}
+
+/* ── project card ── */
+.pc{
+  background:var(--bg2);border:1px solid var(--br2);
+  border-radius:14px;overflow:hidden;
+  display:flex;flex-direction:column;
+  transition:border-color .22s,transform .28s var(--ease),
+             box-shadow .28s var(--ease);
+  position:relative;
+}
+.pc:hover{
+  border-color:var(--br-hover);transform:translateY(-5px);
+  box-shadow:0 20px 56px rgba(4,43,68,.6),
+             0 0 0 1px rgba(113,183,213,.08);
+}
+/* top accent bar (hidden until hover) */
+.pc::before{
+  content:'';position:absolute;top:0;left:0;right:0;
+  height:2px;
+  background:linear-gradient(90deg,var(--ocean-mid),var(--ocean-sky));
+  opacity:0;transition:opacity .22s;
+}
+.pc:hover::before{opacity:1}
+
+.pc-top{
+  padding:1.1rem 1.1rem .7rem;
+  display:flex;align-items:flex-start;justify-content:space-between;gap:.5rem;
+}
+.pc-icon{font-size:1.55rem;line-height:1}
+.pc-actions{display:flex;gap:.3rem;flex-shrink:0}
+.pc-btn{
+  width:29px;height:29px;border-radius:7px;
+  border:1px solid var(--br2);background:var(--bg3);
+  color:var(--txt3);display:flex;align-items:center;
+  justify-content:center;transition:all .15s;
+}
+.pc-btn:hover{border-color:var(--br-hover);color:var(--accent);background:var(--accent-glow)}
+.pc-btn svg{width:14px;height:14px;fill:currentColor}
+
+.pc-body{padding:0 1.1rem .8rem;flex:1}
+.pc-cat{
+  font-family:var(--f-mono);font-size:.62rem;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--txt3);margin-bottom:.45rem;
+}
+.pc-name{
+  font-size:.98rem;font-weight:700;letter-spacing:-.02em;
+  color:var(--txt);margin-bottom:.45rem;line-height:1.25;
+}
+.pc-desc{font-size:.82rem;color:var(--txt2);line-height:1.68}
+
+.pc-foot{
+  padding:.75rem 1.1rem 1.1rem;
+  border-top:1px solid var(--br2);
+  display:flex;flex-wrap:wrap;gap:.35rem;
+}
+.ptag{
+  font-family:var(--f-mono);font-size:.6rem;letter-spacing:.04em;
+  padding:.2rem .52rem;border-radius:4px;
+}
+.ptag.bl{background:rgba(113,183,213,.08);color:var(--ocean-sky);border:1px solid rgba(113,183,213,.15)}
+.ptag.gr{background:rgba(63,185,80,.08);color:var(--green);border:1px solid rgba(63,185,80,.18)}
+.ptag.pu{background:rgba(167,139,250,.08);color:var(--purple);border:1px solid rgba(167,139,250,.18)}
+.ptag.or{background:rgba(249,115,22,.08);color:var(--orange);border:1px solid rgba(249,115,22,.18)}
+.ptag.ye{background:rgba(227,179,65,.08);color:var(--yellow);border:1px solid rgba(227,179,65,.18)}
+
+/* more card */
+.pc-more{
+  background:var(--bg2);border:1px dashed var(--br);
+  border-radius:14px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:.7rem;padding:2rem;text-align:center;min-height:200px;
+  transition:border-color .2s,background .2s;
+  cursor:pointer;text-decoration:none;
+}
+.pc-more:hover{border-color:var(--br-hover);background:var(--bg3)}
+.pc-more-n{
+  font-size:3rem;font-weight:900;color:var(--accent);
+  letter-spacing:-.06em;line-height:1;
+}
+.pc-more-n sup{font-size:1.4rem}
+.pc-more-l{
+  font-family:var(--f-mono);font-size:.66rem;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--txt3);
+}
+
+/* ─── EXPERIENCE ────────────────────────────────── */
+.exp-grid{display:flex;flex-direction:column;gap:.7rem}
+.exp{
+  display:grid;grid-template-columns:3px 1fr;gap:0 1.2rem;
+  background:var(--bg2);border:1px solid var(--br2);
+  border-radius:12px;padding:1.2rem 1.3rem;
+  align-items:start;transition:border-color .2s;
+  overflow:hidden;
+}
+.exp:hover{border-color:var(--br)}
+.exp-stripe{width:3px;border-radius:2px;align-self:stretch;margin-top:2px}
+.exp-stripe.b{background:var(--ocean-sky)}
+.exp-stripe.g{background:var(--green)}
+.exp-stripe.p{background:var(--purple)}
+.exp-stripe.o{background:var(--orange)}
+.exp-content{}
+.exp-hd{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.25rem}
+.exp-role{font-weight:700;font-size:.94rem;color:var(--txt)}
+.exp-period{
+  font-family:var(--f-mono);font-size:.62rem;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--txt3);white-space:nowrap;
+  margin-top:2px;flex-shrink:0;
+}
+.exp-org{font-size:.8rem;color:var(--accent);font-weight:500;margin-bottom:.4rem}
+.exp-desc{font-size:.83rem;color:var(--txt2);line-height:1.7}
+
+/* ─── CONTACT ───────────────────────────────────── */
+.contact-section{background:var(--bg2)}
+.contact-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:3.5rem;align-items:start;
+}
+.c-links{display:flex;flex-direction:column;gap:.55rem;margin-top:1.5rem}
+.cl{
+  display:flex;align-items:center;gap:.9rem;
+  padding:.9rem 1rem;
+  border:1px solid var(--br2);border-radius:10px;
+  background:var(--bg3);
+  transition:border-color .2s,transform .2s var(--ease);
+}
+.cl:hover{border-color:var(--br-hover);transform:translateX(5px)}
+.cl-ico{
+  width:34px;height:34px;border-radius:8px;
+  background:rgba(9,107,144,.15);border:1px solid rgba(9,107,144,.25);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.95rem;flex-shrink:0;
+}
+.cl-k{font-family:var(--f-mono);font-size:.6rem;letter-spacing:.07em;text-transform:uppercase;color:var(--txt3);margin-bottom:1px}
+.cl-v{font-size:.85rem;font-weight:500;color:var(--txt)}
+
+/* form */
+.cform{display:flex;flex-direction:column;gap:.85rem}
+.fg{display:flex;flex-direction:column;gap:.32rem}
+.fg label{
+  font-family:var(--f-mono);font-size:.62rem;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--txt3);
+}
+.fg input,.fg textarea{
+  background:var(--bg3);border:1px solid var(--br2);
+  border-radius:9px;padding:.68rem .9rem;
+  font:400 .875rem var(--f-sans);color:var(--txt);
+  resize:vertical;outline:none;
+  transition:border-color .15s,box-shadow .15s;
+}
+.fg input::placeholder,.fg textarea::placeholder{color:var(--txt3)}
+.fg input:focus,.fg textarea:focus{
+  border-color:var(--ocean-sky);
+  box-shadow:0 0 0 3px rgba(113,183,213,.1);
+}
+.btn-send{
+  align-self:flex-start;
+  display:inline-flex;align-items:center;gap:.45rem;
+  background:var(--ocean-mid);color:#fff;
+  font:600 .875rem var(--f-sans);
+  padding:.65rem 1.5rem;border-radius:9px;
+  border:1px solid rgba(113,183,213,.2);
+  cursor:pointer;
+  transition:all .18s var(--ease);
+}
+.btn-send:hover{
+  background:var(--ocean-sky);color:var(--abyss);
+  transform:translateY(-2px);box-shadow:0 8px 24px rgba(113,183,213,.2);
+}
+.btn-send:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+/* ─── FOOTER ────────────────────────────────────── */
+footer{
+  border-top:1px solid var(--br2);
+  padding:1.6rem 0;
+}
+.footer-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:1rem;flex-wrap:wrap;
+}
+.f-logo{font-family:var(--f-mono);font-size:.82rem;font-weight:600;color:var(--txt2)}
+.f-logo span{color:var(--accent)}
+.f-copy{font-family:var(--f-mono);font-size:.62rem;letter-spacing:.04em;color:var(--txt3)}
+.f-soc{display:flex;gap:.45rem}
+.f-soc a{
+  font-family:var(--f-mono);font-size:.67rem;
+  padding:.28rem .6rem;border-radius:5px;
+  color:var(--txt3);border:1px solid var(--br2);
+  transition:color .15s,border-color .15s;
+}
+.f-soc a:hover{color:var(--accent);border-color:var(--br)}
+
+/* ─── REVEAL ────────────────────────────────────── */
+.rv{
+  opacity:0;transform:translateY(22px);
+  transition:opacity .65s var(--ease),transform .65s var(--ease);
+}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.09s}
+.rv.d2{transition-delay:.18s}
+.rv.d3{transition-delay:.27s}
+.rv.d4{transition-delay:.36s}
+
+/* ─── RESPONSIVE ────────────────────────────────── */
+@media(max-width:980px){
+  .hero-layout{grid-template-columns:1fr}
+  .hero-bento{display:none}
+  .about-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+}
+@media(max-width:720px){
+  .nav-links,.nav-hire{display:none}
+  .burger{display:flex}
+  .proj-grid{grid-template-columns:1fr}
+  .hero-name{font-size:clamp(2.5rem,9vw,3.8rem)}
+  .skills-layout{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .skills-layout{grid-template-columns:1fr}
+  .proj-topbar{flex-direction:column;align-items:flex-start}
+  .footer-inner{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav id="nav">
+  <div class="wrap nav-inner">
+    <a href="#hero" class="logo">
+      <span class="logo-bracket">[</span>NA<span class="logo-bracket">]</span>
+      <span class="logo-pulse" title="Open to opportunities"></span>
+      <span class="logo-open">Open to Work</span>
+    </a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+    </div>
+    <a href="#contact" class="nav-hire">
+      <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      Hire Me
+    </a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-nav" id="mNav">
+  <a href="#about"      onclick="closeNav()"><span class="mn">01</span>About</a>
+  <a href="#skills"     onclick="closeNav()"><span class="mn">02</span>Skills</a>
+  <a href="#projects"   onclick="closeNav()"><span class="mn">03</span>Projects</a>
+  <a href="#experience" onclick="closeNav()"><span class="mn">04</span>Experience</a>
+  <a href="#contact"    onclick="closeNav()"><span class="mn">05</span>Contact</a>
+</div>
+
+<!-- ══ HERO ══ -->
+<section class="hero" id="hero">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="glow-orb a" aria-hidden="true"></div>
+  <div class="glow-orb b" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <div class="hero-layout">
+
+      <!-- LEFT -->
+      <div>
+        <p class="hero-label">FAST-NUCES Faisalabad · CS '28</p>
+        <h1 class="hero-name">
+          <span class="hi">// Hello, I'm</span>
+          <span class="nm">Nehal Aftab</span>
+        </h1>
+        <div class="hero-roles">
+          <span class="rtag b">Frontend Developer</span>
+          <span class="rtag g">UI/UX Designer</span>
+          <span class="rtag p">AI Engineer</span>
+          <span class="rtag o">Software Developer</span>
+          <span class="rtag y">Web Developer</span>
+        </div>
+        <p class="hero-bio">
+          I build <strong>interfaces that feel inevitable</strong> and algorithms that actually work.
+          CS sophomore at FAST-NUCES — designing pixel-perfect UIs by day,
+          writing <strong>AI solvers and Assembly games</strong> by night.
+          CGPA&nbsp;<strong>3+</strong> · 13+ live projects shipped.
+        </p>
+        <div class="hero-btns">
+          <a href="#projects" class="btn-p">
+            <svg viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
+            View Projects
+          </a>
+          <a href="https://github.com/nehalaftab05-web" target="_blank" rel="noopener" class="btn-o">
+            <svg viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a href="#contact" class="btn-o">Get in Touch</a>
+        </div>
+      </div>
+
+      <!-- RIGHT — bento stat panel -->
+      <div class="hero-bento" aria-hidden="true">
+        <div class="bento">
+          <div class="bento-num">13<sup>+</sup></div>
+          <div class="bento-label">Live Projects</div>
+          <div class="bento-bar"><div class="bento-bar-fill" style="width:100%"></div></div>
+        </div>
+        <div class="bento">
+          <div class="bento-num">3<sup>+</sup></div>
+          <div class="bento-label">CGPA</div>
+          <div class="bento-bar"><div class="bento-bar-fill" style="width:80%"></div></div>
+        </div>
+        <div class="bento">
+          <div class="bento-num">5</div>
+          <div class="bento-label">Disciplines</div>
+          <div class="bento-bar"><div class="bento-bar-fill" style="width:90%"></div></div>
+        </div>
+        <div class="bento">
+          <div class="bento-num">2</div>
+          <div class="bento-label">Campus Roles</div>
+          <div class="bento-bar"><div class="bento-bar-fill" style="width:70%"></div></div>
+        </div>
+        <div class="bento wide">
+          <div class="bento-terminal">
+            <div><span class="t-p">❯</span> <span class="t-path">~/portfolio</span> <span class="t-c">cat about.json</span></div>
+            <div style="margin-top:.3rem"><span class="t-key">status</span>: <span class="t-val">"open to internships"</span></div>
+            <div><span class="t-key">stack</span>: <span class="t-val">["JS","Python","C++","NASM"]</span></div>
+            <div><span class="t-key">focus</span>: <span class="t-val">"UI/UX + AI Engineering"</span></div>
+            <div><span class="t-key">battle101</span>: <span class="t-val">"FAST-NUCES participant ✓"</span></div>
+            <div style="margin-top:.4rem"><span class="t-p">❯</span> <span class="t-cursor"></span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="scroll-hint" aria-hidden="true">scroll</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══ ABOUT ══ -->
+<section id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="rv">
+        <p class="sec-label">About</p>
+        <h2 class="sec-title">More than a CS student.</h2>
+        <div class="about-prose" style="margin-top:1.2rem">
+          <p>I'm Nehal — a CS sophomore at <strong>FAST-NUCES Faisalabad</strong> who builds things across the full spectrum: from polished landing pages to AI solvers to Assembly games. I don't pick between designer and developer — I'm both.</p>
+          <p>On campus I serve as <strong>Teaching Assistant for Expository Writing</strong> (Jan–Jun 2026), which trained me to communicate complex ideas with precision — the same discipline that makes my UIs readable. As <strong>Social Media Co-Head</strong> of the Photography Society, I run visual identity and content strategy from concept to post.</p>
+          <p>I competed in <strong>Battle 101 at FAST-NUCES</strong> — a high-pressure competitive programming challenge that sharpened my problem-solving instincts under time constraints. Currently deepening SQL skills through Harvard CS50.</p>
+        </div>
+        <div class="badge-row" style="margin-top:1.4rem">
+          <span class="badge"><span class="bd"></span>CGPA 3+</span>
+          <span class="badge"><span class="bd"></span>Battle 101 · FAST-NUCES</span>
+          <span class="badge"><span class="bd"></span>CS50 SQL · Harvard</span>
+          <span class="badge"><span class="bd"></span>Teaching Assistant</span>
+          <a href="https://www.youtube.com/playlist?list=PLXDU_eVOJTx5IuSrbtanZHnDuPB3Hx0hq" target="_blank" rel="noopener" class="badge" style="text-decoration:none;border-color:rgba(113,183,213,.35)"><span class="bd"></span>Figma Design 2025 ↗</a>
+        </div>
+        <div class="stack-grid">
+          <span class="chip">HTML5 / CSS3</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">Python</span>
+          <span class="chip">C / C++</span>
+          <span class="chip">NASM Assembly</span>
+          <span class="chip">SQL</span>
+          <span class="chip">Figma</span>
+          <span class="chip">Git / GitHub</span>
+          <span class="chip">OOP & Design Patterns</span>
+          <span class="chip">UML Diagrams</span>
+        </div>
+      </div>
+
+      <div class="about-aside rv d1">
+        <div class="info-row">
+          <span class="info-emoji">🎓</span>
+          <div>
+            <div class="info-k">Education</div>
+            <div class="info-v">BS Computer Science<br/>FAST-NUCES Faisalabad · 2024–2028</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <span class="info-emoji">📊</span>
+          <div>
+            <div class="info-k">CGPA</div>
+            <div class="info-v">3+</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <span class="info-emoji">💼</span>
+          <div>
+            <div class="info-k">Work Email</div>
+            <div class="info-v"><a href="mailto:nehalaftabwork@gmail.com">nehalaftabwork@gmail.com</a></div>
+          </div>
+        </div>
+        <div class="info-row">
+          <span class="info-emoji">🐙</span>
+          <div>
+            <div class="info-k">GitHub</div>
+            <div class="info-v"><a href="https://github.com/nehalaftab05-web" target="_blank" rel="noopener">github.com/nehalaftab05-web</a></div>
+          </div>
+        </div>
+        <div class="info-row">
+          <span class="info-emoji">🏢</span>
+          <div>
+            <div class="info-k">LinkedIn</div>
+            <div class="info-v"><a href="https://linkedin.com/in/nehal-aftab" target="_blank" rel="noopener">linkedin.com/in/nehal-aftab</a></div>
+          </div>
+        </div>
+        <div class="info-row">
+          <span class="info-emoji">📍</span>
+          <div>
+            <div class="info-k">Location</div>
+            <div class="info-v">Hafizabad, Punjab · Currently in Faisalabad (University)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══ SKILLS ══ -->
+<section id="skills" class="skills-section">
+  <div class="wrap">
+    <div class="rv">
+      <p class="sec-label">Skills</p>
+      <h2 class="sec-title">Full-stack toolkit.</h2>
+      <p class="sec-desc">From wireframe to working binary — everything I reach for when building.</p>
+    </div>
+    <div class="skills-layout rv" style="margin-top:2rem">
+      <div class="sk-block">
+        <div class="sk-head"><span class="sk-ico">🌐</span><span class="sk-title">Frontend</span></div>
+        <div class="sk-list">
+          <span class="sk-item">HTML5 / CSS3 / SCSS</span>
+          <span class="sk-item">JavaScript (ES6+)</span>
+          <span class="sk-item">Responsive Design</span>
+          <span class="sk-item">CSS Animations</span>
+          <span class="sk-item">DOM Manipulation</span>
+        </div>
+      </div>
+      <div class="sk-block">
+        <div class="sk-head"><span class="sk-ico">🎨</span><span class="sk-title">UI/UX Design</span></div>
+        <div class="sk-list">
+          <span class="sk-item">Figma / Prototyping</span>
+          <span class="sk-item">Wireframing</span>
+          <span class="sk-item">Design Systems</span>
+          <span class="sk-item">User Research</span>
+          <span class="sk-item">Graphic Design</span>
+        </div>
+      </div>
+      <div class="sk-block">
+        <div class="sk-head"><span class="sk-ico">🤖</span><span class="sk-title">AI / ML</span></div>
+        <div class="sk-list">
+          <span class="sk-item">Search Algorithms (A*, BFS)</span>
+          <span class="sk-item">CSP + AC-3 + Backtracking</span>
+          <span class="sk-item">Neural Networks (Delta)</span>
+          <span class="sk-item">K-Means / Clustering</span>
+          <span class="sk-item">Minimax / Alpha-Beta</span>
+        </div>
+      </div>
+      <div class="sk-block">
+        <div class="sk-head"><span class="sk-ico">⚙️</span><span class="sk-title">Programming</span></div>
+        <div class="sk-list">
+          <span class="sk-item">Python</span>
+          <span class="sk-item">C / C++ (OOP)</span>
+          <span class="sk-item">x86 NASM Assembly</span>
+          <span class="sk-item">SQL (CS50 Harvard)</span>
+          <span class="sk-item">Data Structures & Algorithms</span>
+        </div>
+      </div>
+      <div class="sk-block">
+        <div class="sk-head"><span class="sk-ico">🏗️</span><span class="sk-title">Software Dev</span></div>
+        <div class="sk-list">
+          <span class="sk-item">OOP & GoF Design Patterns</span>
+          <span class="sk-item">Full UML Diagram Suite</span>
+          <span class="sk-item">Git / GitHub Pages</span>
+          <span class="sk-item">Software Design & Analysis</span>
+          <span class="sk-item">Discrete Structures</span>
+        </div>
+      </div>
+      <div class="sk-block">
+        <div class="sk-head"><span class="sk-ico">📜</span><span class="sk-title">Courses &amp; Certs</span></div>
+        <div class="sk-list">
+          <span class="sk-item">
+            <a href="https://www.youtube.com/playlist?list=PLXDU_eVOJTx5IuSrbtanZHnDuPB3Hx0hq"
+               target="_blank" rel="noopener"
+               style="color:inherit;border-bottom:1px solid rgba(113,183,213,.35);padding-bottom:1px;transition:border-color .15s"
+               onmouseover="this.style.borderColor='var(--accent)'"
+               onmouseout="this.style.borderColor='rgba(113,183,213,.35)'">
+              Figma Design for Beginners 2025
+            </a>
+            <span style="font-size:.6rem;margin-left:.3rem;color:var(--accent);opacity:.7">↗ Figma</span>
+          </span>
+          <span class="sk-item">Harvard CS50 SQL</span>
+          <span class="sk-item">Sigma Web Dev Course</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══ PROJECTS ══ -->
+<section id="projects">
+  <div class="wrap">
+    <div class="proj-topbar rv">
+      <div>
+        <p class="sec-label">Projects</p>
+        <h2 class="sec-title">Things I've actually shipped.</h2>
+      </div>
+      <div class="proj-count-box">
+        Live repos<br/><strong>13+</strong>
+      </div>
+    </div>
+
+    <div class="proj-grid">
+
+<!-- 1 Wumpus -->
+<article class="pc rv">
+  <div class="pc-top">
+    <span class="pc-icon">🧠</span>
+    <div class="pc-actions">
+      <a href="https://nehalaftab05-web.github.io/Wumpus-Logic-Navigator/" target="_blank" rel="noopener" class="pc-btn" title="Live Demo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h5v2H7v10h10v-3h2v5H5V5z"/></svg></a>
+      <a href="https://github.com/nehalaftab05-web/Wumpus-Logic-Navigator" target="_blank" rel="noopener" class="pc-btn" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></a>
+    </div>
+  </div>
+  <div class="pc-body">
+    <div class="pc-cat">JavaScript · AI · Logic</div>
+    <h3 class="pc-name">Wumpus Logic Navigator</h3>
+    <p class="pc-desc">Interactive browser implementation of the classic Wumpus World. An AI agent uses propositional logic and a live knowledge base to navigate the cave, avoid pits, and retrieve the gold.</p>
+  </div>
+  <div class="pc-foot"><span class="ptag bl">JavaScript</span><span class="ptag pu">AI / Logic</span><span class="ptag gr">Live Demo</span></div>
+</article>
+
+<!-- 2 Sudoku CSP -->
+<article class="pc rv d1">
+  <div class="pc-top">
+    <span class="pc-icon">🔢</span>
+    <div class="pc-actions">
+      <a href="https://github.com/nehalaftab05-web/-Sudoku-Solver-CSP-with-AC-3-Backtracking." target="_blank" rel="noopener" class="pc-btn" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></a>
+    </div>
+  </div>
+  <div class="pc-body">
+    <div class="pc-cat">Python · CSP · AI</div>
+    <h3 class="pc-name">Sudoku Solver — CSP + AC-3</h3>
+    <p class="pc-desc">AI Sudoku solver using Constraint Satisfaction with AC-3 arc consistency and backtracking. Propagates constraints before searching to eliminate impossible states and solve any valid 9×9 grid.</p>
+  </div>
+  <div class="pc-foot"><span class="ptag bl">Python</span><span class="ptag pu">CSP / AC-3</span><span class="ptag or">Backtracking</span></div>
+</article>
+
+<!-- 3 AI Search -->
+<article class="pc rv d2">
+  <div class="pc-top">
+    <span class="pc-icon">🔍</span>
+    <div class="pc-actions">
+      <a href="https://github.com/nehalaftab05-web/AI-Search-Algorithms" target="_blank" rel="noopener" class="pc-btn" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></a>
+    </div>
+  </div>
+  <div class="pc-body">
+    <div class="pc-cat">Python · AI Algorithms</div>
+    <h3 class="pc-name">AI Search Algorithms</h3>
+    <p class="pc-desc">Complete library of uninformed + informed search strategies: BFS, DFS, UCS, IDS, Greedy Best-First, A*, Hill Climbing, Local Beam Search, and Simulated Annealing — all from scratch in Python.</p>
+  </div>
+  <div class="pc-foot"><span class="ptag bl">Python</span><span class="ptag pu">A* / BFS / DFS</span><span class="ptag or">Heuristics</span></div>
+</article>
+
+<!-- 4 FreshHarvest -->
+<article class="pc rv">
+  <div class="pc-top">
+    <span class="pc-icon">🌿</span>
+    <div class="pc-actions">
+      <a href="https://nehalaftab05-web.github.io/Fresh-Harvest/" target="_blank" rel="noopener" class="pc-btn" title="Live Demo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h5v2H7v10h10v-3h2v5H5V5z"/></svg></a>
+      <a href="https://github.com/nehalaftab05-web/Fresh-Harvest" target="_blank" rel="noopener" class="pc-btn" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></a>
+    </div>
+  </div>
+  <div class="pc-body">
+    <div class="pc-cat">HTML/CSS/JS · UI/UX · SDA</div>
+    <h3 class="pc-name">FreshHarvest</h3>
+    <p class="pc-desc">Farm management UI prototype for Software Design & Analysis. Full UML suite (use case, class, sequence, activity, state diagrams) with a user-first responsive interface applying GoF design patterns.</p>
+  </div>
+  <div class="pc-foot"><span class="ptag gr">Live Demo</span><span class="ptag bl">HTML/CSS/JS</span><span class="ptag ye">UI/UX</span><span class="ptag or">UML</span></div>
+</article>
+
+<!-- 5 AURA -->
+<article class="pc rv d1">
+  <div class="pc-top">
+    <span class="pc-icon">✨</span>
+    <div class="pc-actions">
+      <a href="https://nehalaftab05-web.github.io/AURA-landing-page-/" target="_blank" rel="noopener" class="pc-btn" title="Live Demo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h5v2H7v10h10v-3h2v5H5V5z"/></svg></a>
+      <a href="https://github.com/nehalaftab05-web/AURA-landing-page-" target="_blank" rel="noopener" class="pc-btn" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></a>
+    </div>
+  </div>
+  <div class="pc-body">
+    <div class="pc-cat">CSS Animations · Dark UI</div>
+    <h3 class="pc-name">AURA Landing Page</h3>
+    <p class="pc-desc">Visually immersive dark landing page with ambient layered backgrounds, CSS-only animations, and polished micro-interactions — zero frameworks, just handcrafted vanilla CSS and JavaScript.</p>
+  </div>
+  <div class="pc-foot"><span class="ptag gr">Live Demo</span><span class="ptag bl">CSS / JS</span><span class="ptag ye">Animations</span></div>
+</article>
+
+<!-- 6 Atari Breakout -->
+<article class="pc rv d2">
+  <div class="pc-top">
+    <span class="pc-icon">🕹️</span>
+    <div class="pc-actions">
+      <a href="https://github.com/nehalaftab05-web/Atari-Breakout-Game-using-Computer-Organization-and-Assembly-language" target="_blank" rel="noopener" class="pc-btn" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></a>
+    </div>
+  </div>
+  <div class="pc-body">
+    <div class="pc-cat">x86 NASM Assembly · CO · Game</div>
+    <h3 class="pc-name">Atari Breakout — Assembly</h3>
+    <p class="pc-desc">Full Atari Breakout game in x86 NASM Assembly (Computer Organisation project). Graphics, collision detection, score tracking, game states — all at the register level. No OS libraries.</p>
+  </div>
+  <div class="pc-foot"><span class="ptag or">NASM Assembly</span><span class="ptag pu">x86</span><span class="ptag ye">Game Dev</span></div>
+</article>
+
+<!-- 7 Endless Runner -->
+<article class="pc rv">
+  <div class="pc-top">
+    <span class="pc-icon">🏃</span>
+    <div class="pc-actions">
+      <a href="https://github.com/nehalaftab05-web/Endless-Runner-Game" target="_blank" rel="noopener" class="pc-btn" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></a>
+    </div>
+  </div>
+  <div class="pc-body">
+    <div class="pc-cat">x86 NASM Assembly · Game</div>
+    <h3 class="pc-name">Endless Runner Game</h3>
+    <p class="pc-desc">Side-scrolling endless runner written entirely in x86 NASM Assembly — real-time game loop, sprite movement, procedural obstacle generation, collision, and live score tracking. Raw, fast, and fun.</p>
+  </div>
+  <div class="pc-foot"><span class="ptag or">NASM Assembly</span><span class="ptag ye">Game Dev</span><span class="ptag pu">x86</span></div>
+</article>
+
+<!-- 8 Chess OOP -->
+<article class="pc rv d1">
+  <div class="pc-top">
+    <span class="pc-icon">♟️</span>
+    <div class="pc-actions">
+      <a href="https://github.com/nehalaftab05-web/CHESS-GAME-USING-OOP" target="_blank" rel="noopener" class="pc-btn" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></a>
+    </div>
+  </div>
+  <div class="pc-body">
+    <div class="pc-cat">C++ · OOP · Game Logic</div>
+    <h3 class="pc-name">Chess Game — OOP</h3>
+    <p class="pc-desc">Fully playable Chess implemented in C++ using Object-Oriented Programming. Pieces as class hierarchies, rule enforcement, move validation, check/checkmate detection — clean OOP design from board to gameplay.</p>
+  </div>
+  <div class="pc-foot"><span class="ptag bl">C++</span><span class="ptag pu">OOP</span><span class="ptag ye">Game Logic</span></div>
+</article>
+
+<!-- 9 Smart Campus -->
+<article class="pc rv d2">
+  <div class="pc-top">
+    <span class="pc-icon">🏫</span>
+    <div class="pc-actions">
+      <a href="https://github.com/nehalaftab05-web/Smart-Campus-Access-Analytics-System-C-Capstone-Project-Discrete-Structures-" target="_blank" rel="noopener" class="pc-btn" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></a>
+    </div>
+  </div>
+  <div class="pc-body">
+    <div class="pc-cat">C++ · Discrete Structures · Graphs</div>
+    <h3 class="pc-name">Smart Campus Access Analytics</h3>
+    <p class="pc-desc">Discrete Structures capstone — C++ system modelling campus access using graph theory, set theory, and Boolean logic. Tracks, analyses, and reports building access patterns with mathematical rigour.</p>
+  </div>
+  <div class="pc-foot"><span class="ptag bl">C++</span><span class="ptag pu">Graph Theory</span><span class="ptag ye">Capstone</span></div>
+</article>
+
+<!-- 10 Console Social Media -->
+<article class="pc rv">
+  <div class="pc-top">
+    <span class="pc-icon">📡</span>
+    <div class="pc-actions">
+      <a href="https://github.com/nehalaftab05-web/Console-Based-Social-Media-Platform" target="_blank" rel="noopener" class="pc-btn" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></a>
+    </div>
+  </div>
+  <div class="pc-body">
+    <div class="pc-cat">C++ · Data Structures · OOP</div>
+    <h3 class="pc-name">Console Social Media Platform</h3>
+    <p class="pc-desc">C++ social network simulation — custom hash table for users, doubly linked list for feeds, AVL tree for sorted friend lists. Every data structure hand-built; zero STL containers used.</p>
+  </div>
+  <div class="pc-foot"><span class="ptag bl">C++</span><span class="ptag or">Hash Tables</span><span class="ptag pu">AVL Tree</span></div>
+</article>
+
+<!-- 11 Landing Page -->
+<article class="pc rv d1">
+  <div class="pc-top">
+    <span class="pc-icon">🎯</span>
+    <div class="pc-actions">
+      <a href="https://nehalaftab05-web.github.io/Landing-page/" target="_blank" rel="noopener" class="pc-btn" title="Live Demo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h5v2H7v10h10v-3h2v5H5V5z"/></svg></a>
+      <a href="https://github.com/nehalaftab05-web/Landing-page" target="_blank" rel="noopener" class="pc-btn" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></a>
+    </div>
+  </div>
+  <div class="pc-body">
+    <div class="pc-cat">HTML / CSS / JavaScript</div>
+    <h3 class="pc-name">Product Landing Page</h3>
+    <p class="pc-desc">Clean responsive product landing page with semantic HTML5, CSS Grid and Flexbox layout, smooth scroll interactions, and mobile-first design — fully tested across all major breakpoints.</p>
+  </div>
+  <div class="pc-foot"><span class="ptag gr">Live Demo</span><span class="ptag bl">HTML/CSS/JS</span><span class="ptag ye">Responsive</span></div>
+</article>
+
+<!-- overflow -->
+<a href="https://github.com/nehalaftab05-web" target="_blank" rel="noopener" class="pc-more rv d2">
+  <div class="pc-more-n">13<sup>+</sup></div>
+  <div class="pc-more-l">Projects on GitHub</div>
+  <span class="btn-o" style="font-size:.78rem;padding:.45rem 1rem;margin-top:.4rem">View All →</span>
+</a>
+
+    </div><!-- /proj-grid -->
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══ EXPERIENCE ══ -->
+<section id="experience">
+  <div class="wrap">
+    <div class="rv">
+      <p class="sec-label">Experience</p>
+      <h2 class="sec-title">Beyond the coursework.</h2>
+    </div>
+    <div class="exp-grid" style="margin-top:2rem">
+      <div class="exp rv">
+        <div class="exp-stripe b"></div>
+        <div class="exp-content">
+          <div class="exp-hd">
+            <div class="exp-role">Teaching Assistant — Expository Writing</div>
+            <div class="exp-period">Jan 2026 – Jun 2026</div>
+          </div>
+          <div class="exp-org">FAST-NUCES Faisalabad</div>
+          <p class="exp-desc">Supported students in structuring arguments and academic prose. The same communication clarity now shapes how I write UI copy, design microcopy, and document code.</p>
+        </div>
+      </div>
+      <div class="exp rv d1">
+        <div class="exp-stripe g"></div>
+        <div class="exp-content">
+          <div class="exp-hd">
+            <div class="exp-role">Social Media Co-Head</div>
+            <div class="exp-period">2024 – Present</div>
+          </div>
+          <div class="exp-org">FAST Photography Society</div>
+          <p class="exp-desc">Managing content strategy, visual identity, and audience engagement — combining graphic design, photography curation, and campaign planning end-to-end.</p>
+        </div>
+      </div>
+      <div class="exp rv d2">
+        <div class="exp-stripe p"></div>
+        <div class="exp-content">
+          <div class="exp-hd">
+            <div class="exp-role">Battle 101 Participant</div>
+            <div class="exp-period">FAST-NUCES</div>
+          </div>
+          <div class="exp-org">FAST-NUCES Faisalabad — Competitive Programming</div>
+          <p class="exp-desc">Competed in Battle 101, a high-pressure competitive programming challenge at FAST-NUCES — solving algorithmic problems under strict time constraints and sharpening problem-solving instincts.</p>
+        </div>
+      </div>
+      <div class="exp rv d3">
+        <div class="exp-stripe o"></div>
+        <div class="exp-content">
+          <div class="exp-hd">
+            <div class="exp-role">Self-Directed Learning</div>
+            <div class="exp-period">2025 – Present</div>
+          </div>
+          <div class="exp-org">Harvard CS50 SQL · Sigma Web Dev Course (YouTube)</div>
+          <p class="exp-desc">Structured self-study in database design (CS50 SQL) and advanced web techniques. Building on CS foundations to add SQL, relational modelling, and modern frontend tooling to the stack.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact" class="contact-section">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="rv">
+        <p class="sec-label">Contact</p>
+        <h2 class="sec-title">Let's build something together.</h2>
+        <p class="sec-desc">Open to internships in UI/UX, frontend development, or software engineering. Happy to collab, get feedback, or just talk tech.</p>
+        <div class="c-links">
+          <a href="mailto:nehalaftabwork@gmail.com" class="cl">
+            <div class="cl-ico">✉️</div>
+            <div><div class="cl-k">Work Email</div><div class="cl-v">nehalaftabwork@gmail.com</div></div>
+          </a>
+          <a href="https://github.com/nehalaftab05-web" target="_blank" rel="noopener" class="cl">
+            <div class="cl-ico">🐙</div>
+            <div><div class="cl-k">GitHub</div><div class="cl-v">github.com/nehalaftab05-web</div></div>
+          </a>
+          <a href="https://linkedin.com/in/nehal-aftab" target="_blank" rel="noopener" class="cl">
+            <div class="cl-ico">💼</div>
+            <div><div class="cl-k">LinkedIn</div><div class="cl-v">linkedin.com/in/nehal-aftab</div></div>
+          </a>
+        </div>
+      </div>
+      <form class="cform rv d1" onsubmit="sendMsg(event)" novalidate>
+        <div class="fg">
+          <label for="cn">Name</label>
+          <input type="text" id="cn" placeholder="Your name" required autocomplete="name"/>
+        </div>
+        <div class="fg">
+          <label for="ce">Email</label>
+          <input type="email" id="ce" placeholder="your@email.com" required autocomplete="email"/>
+        </div>
+        <div class="fg">
+          <label for="cs">Subject</label>
+          <input type="text" id="cs" placeholder="Internship / Collab / Other"/>
+        </div>
+        <div class="fg">
+          <label for="cm">Message</label>
+          <textarea id="cm" rows="4" placeholder="What's on your mind?" required></textarea>
+        </div>
+        <button type="submit" class="btn-send" id="sendBtn">
+          Send Message
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <div class="f-logo">nehal<span>.</span>dev</div>
+      <div class="f-copy">© 2025 Nehal Aftab · Hafizabad / Faisalabad, Pakistan</div>
+      <div class="f-soc">
+        <a href="https://github.com/nehalaftab05-web" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com/in/nehal-aftab" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:nehalaftabwork@gmail.com">Email</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* nav scroll + active */
+const nav=document.getElementById('nav');
+const secs=[...document.querySelectorAll('section[id]')];
+const navAs=[...document.querySelectorAll('.nav-links a')];
+
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled',scrollY>30);
+},{ passive:true });
+
+const activeObs=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(e.isIntersecting)
+      navAs.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));
+  });
+},{ threshold:.35 });
+secs.forEach(s=>activeObs.observe(s));
+
+/* burger */
+const burger=document.getElementById('burger');
+const mNav=document.getElementById('mNav');
+burger.addEventListener('click',()=>{
+  const o=burger.classList.toggle('open');
+  mNav.classList.toggle('open',o);
+  burger.setAttribute('aria-expanded',o);
+  document.body.style.overflow=o?'hidden':'';
+});
+function closeNav(){
+  burger.classList.remove('open');
+  mNav.classList.remove('open');
+  burger.setAttribute('aria-expanded','false');
+  document.body.style.overflow='';
+}
+/* close on outside click */
+document.addEventListener('click',e=>{
+  if(mNav.classList.contains('open')&&!mNav.contains(e.target)&&!burger.contains(e.target))closeNav();
+});
+
+/* scroll reveal */
+const rvObs=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');rvObs.unobserve(e.target);}});
+},{ threshold:.1, rootMargin:'0px 0px -30px 0px' });
+document.querySelectorAll('.rv').forEach(el=>rvObs.observe(el));
+
+/* bento bar animation on viewport entry */
+const barObs=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.bento-bar-fill').forEach(b=>b.style.animationPlayState='running');
+    }
+  });
+},{ threshold:.3 });
+document.querySelectorAll('.bento').forEach(b=>barObs.observe(b));
+
+/* contact form */
+function sendMsg(e){
+  e.preventDefault();
+  const n=document.getElementById('cn').value.trim();
+  const em=document.getElementById('ce').value.trim();
+  const s=document.getElementById('cs').value.trim();
+  const m=document.getElementById('cm').value.trim();
+  const btn=document.getElementById('sendBtn');
+  if(!n||!em||!m){
+    const orig=btn.innerHTML;
+    btn.textContent='Please fill all fields';
+    setTimeout(()=>btn.innerHTML=orig,2200);
+    return;
+  }
+  btn.disabled=true;btn.textContent='Sending…';
+  const ml=`mailto:nehalaftabwork@gmail.com?subject=${encodeURIComponent(s||'Portfolio Inquiry — '+n)}&body=${encodeURIComponent('From: '+n+'\nEmail: '+em+'\n\n'+m)}`;
+  window.location.href=ml;
+  setTimeout(()=>{btn.textContent='Sent ✓ Check your email app';btn.style.background='#1a7f37';},600);
+}
+</script>
+</body>
+</html>
